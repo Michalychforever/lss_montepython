@@ -1,0 +1,9 @@
+sgc_z3_new.data_directory = data.path['data']
+sgc_z3_new.measurements_file = 'sgc_z3/pk.dat'
+sgc_z3_new.covmat_file = 'sgc_z3/covmat.dat'
+sgc_z3_new.window_file = 'sgc_z3/window.dat'
+
+sgc_z3_new.ksize = 48
+sgc_z3_new.z      = 0.61
+sgc_z3_new.use_nuisance =['norm','b^{(2)}_1','b^{(2)}_2','b^{(2)}_{G_2}','c^{(2)}_{0}','c^{(2)}_{2}','P^{(2)}_{shot}','b^{(2)}_4']
+#sgc_z3_new.use_nuisance =['b^{(2)}_1','b^{(2)}_2','b^{(2)}_{G_2}','c^{(2)}_{0}','c^{(2)}_{2}','P^{(2)}_{shot}','b^{(2)}_4']
