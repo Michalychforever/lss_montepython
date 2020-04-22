@@ -1,0 +1,54 @@
+data.experiments=['boss_bao_only']
+
+# Cosmological parameters list
+
+# data.parameters[class name] = [mean, min, max, 1-sigma, scale, role]
+
+# Nuisance
+data.parameters['gal-bias__1']   = [2.0,   None, None, .3,  1, 'nuisance']
+data.parameters['Sigma-nl'] = [3.5, 1., 6., 2., 1, 'nuisance']
+data.parameters['alpha-par'] = [1., 0.8, 1.2, 0.1, 1, 'nuisance']
+data.parameters['alpha-perp'] = [1.,0.8,1.2,0.1,1,'nuisance']
+
+# Derived parameter list
+
+# Class arguments
+# These are the fiducial cosmology used in the Beutler+16 analysis
+# use a single massive neutrino
+data.cosmo_arguments['omega_b'] = 0.022
+data.cosmo_arguments['Omega_cdm'] = 0.26044772961
+data.cosmo_arguments['N_ur'] = 2.0328
+data.cosmo_arguments['T_ncdm'] = 0.71611
+data.cosmo_arguments['YHe'] = 0.2454
+data.cosmo_arguments['z_reio'] = 11.357
+data.cosmo_arguments['alpha_s'] = 0.
+data.cosmo_arguments['Omega_k'] = 0.
+data.cosmo_arguments['Omega_fld'] = 0.
+data.cosmo_arguments['sigma8'] = 0.824
+data.cosmo_arguments['n_s'] = 0.96
+data.cosmo_arguments['N_ncdm'] = 1
+data.cosmo_arguments['m_ncdm'] = 0.06
+data.cosmo_arguments['h'] = 0.676
+
+# Montepython arguments
+data.N=1000
+data.write_step=10
+
+# oversample the nuisance parameters here
+#data.over_sampling=[1,1]
+
+# input files for specific mock
+boss_bao_only.z_type = 'low'
+# must be 'low' or 'high'
+boss_bao_only.field = 'sgc'
+# must be 'ngc' or 'sgc'
+boss_bao_only.file = ['sgc_z1/pk_rec.dat']
+boss_bao_only.cov_file = ['sgc_z1/covmat_rec.dat']
+
+# whether to use window function
+boss_bao_only.use_window = True
+boss_bao_only.use_quadrupole = True
+boss_bao_only.inflate_error = False
+
+# Set error covariance parameters
+boss_bao_only.Delta_k = 0.1

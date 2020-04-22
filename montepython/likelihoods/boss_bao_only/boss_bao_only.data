@@ -1,0 +1,17 @@
+# Unreconstructed BOSS multipole data
+boss_bao_only.data_directory = data.path['data']
+
+# Set redshifts
+boss_bao_only.z = [0.38,0.61]
+boss_bao_only.N_mocks = 999
+
+# set nuisance
+boss_bao_only.use_nuisance = ['gal-bias__1','alpha-par','alpha-perp','Sigma-nl']
+
+# other input parameters
+boss_bao_only.Pk_sm_lin_file = ['bao_files/pk_sm_lin_interp_z1.dat','bao_files/pk_sm_lin_interp_z3.dat']
+boss_bao_only.Pk_lin_file = ['bao_files/pk_lin_interp_z1.dat','bao_files/pk_lin_interp_z3.dat']
+boss_bao_only.window_file = ['ngc_z1/window.dat','ngc_z3/window.dat','sgc_z1/window.dat','sgc_z3/window.dat']
+
+# Gaussian smoothing of density field
+boss_bao_only.Sigma_smooth = 15.
