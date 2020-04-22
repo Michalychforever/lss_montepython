@@ -14,4 +14,4 @@ The repo includes:
 * BAO-only likelihood that extracts the anisotropic BAO signal from the post-reconstructed power spectra
 * Joint FS+BAO likelihoods with the appropriate covariance matrices for the same data chunks
 
-Note that you need CLASS-PT to evaluate FS and FS+BAO likelihoods
+Note that you need [CLASS-PT](https://github.com/Michalychforever/CLASS-PT) to evaluate FS and FS+BAO likelihoods
