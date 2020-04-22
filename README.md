@@ -2,7 +2,7 @@
 
 **Contributors:** Mikhail (Misha) Ivanov, Anton Chudaykin, Oliver Philcox 
 
-These are the custom [BOSS DR12](https://arxiv.org/abs/1607.03155) galaxy power spectra likelihoods for Montepython that were analyzed in the papers 
+These are the custom-built [BOSS DR12](https://arxiv.org/abs/1607.03155) galaxy power spectra likelihoods for Montepython that were analyzed in the papers 
 
 * [*Cosmological Parameters from the BOSS Galaxy Power Spectrum*](https://arxiv.org/abs/1909.05277)
 * [*Cosmological Parameters and Neutrino Masses from the Final Planck and Full-Shape BOSS Data*](https://arxiv.org/abs/1912.08208) 
