@@ -1,6 +1,7 @@
 #------Experiments to test (separated with commas)-----
 
 data.experiments=['ngc_z3_new','sgc_z3_new','ngc_z1_new','sgc_z1_new']
+#data.experiments = ['bao_fs_ngc_z3','bao_fs_sgc_z3','bao_fs_ngc_z1','bao_fs_sgc_z1']
 
 
 #------ Settings for the over-sampling.

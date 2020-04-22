@@ -1,0 +1,12 @@
+bao_fs_ngc_z3.data_directory = data.path['data']
+bao_fs_ngc_z3.measurements_file = 'ngc_z3/pk.dat'
+#bao_fs_ngc_z1.covmat_file = 'ngc_z1/covmat.dat'
+bao_fs_ngc_z3.covmat_file = 'ngc_z3/ngc_z3_unrec_mon+quad+alphas_cov_48bins.dat'
+bao_fs_ngc_z3.window_file = 'ngc_z3/window.dat'
+bao_fs_ngc_z3.alpha_means = 'ngc_z3/alpha_means.dat'
+
+bao_fs_ngc_z3.ksize = 48
+bao_fs_ngc_z3.z      = 0.61
+bao_fs_ngc_z3.use_nuisance =['b^{(1)}_1','b^{(1)}_2','b^{(1)}_{G_2}','c^{(1)}_{0}','c^{(1)}_{2}','P^{(1)}_{shot}','b^{(1)}_4']
+#bao_fs_ngc_z3.use_nuisance =['norm','b^{(1)}_1','b^{(1)}_2','b^{(1)}_{G_2}','c^{(1)}_{0}','c^{(1)}_{2}','P^{(1)}_{shot}','b^{(1)}_4']
+#bao_fs_ngc_z3.use_nuisance =['norm'I,'b^{(3)}_1','b^{(3)}_2','b^{(3)}_{G_2}','c^{(3)}_{0}','c^{(3)}_{2}','P^{(3)}_{shot}','b^{(3)}_4']

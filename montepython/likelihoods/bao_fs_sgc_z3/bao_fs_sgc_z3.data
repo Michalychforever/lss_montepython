@@ -1,0 +1,11 @@
+bao_fs_sgc_z3.data_directory = data.path['data']
+bao_fs_sgc_z3.measurements_file = 'sgc_z3/pk.dat'
+#bao_fs_sgc_z3.covmat_file = 'sgc_z3/sgc_z3_unrec_mon+quad+alphas_prec_corrected_FINAL.dat'
+bao_fs_sgc_z3.covmat_file = 'sgc_z3/sgc_z3_unrec_mon+quad+alphas_cov_48bins.dat'
+bao_fs_sgc_z3.window_file = 'sgc_z3/window.dat'
+bao_fs_sgc_z3.alpha_means = 'sgc_z3/alpha_means.dat'
+
+bao_fs_sgc_z3.ksize = 48
+bao_fs_sgc_z3.z      = 0.61
+bao_fs_sgc_z3.use_nuisance =['b^{(2)}_1','b^{(2)}_2','b^{(2)}_{G_2}','c^{(2)}_{0}','c^{(2)}_{2}','P^{(2)}_{shot}','b^{(2)}_4']
+#bao_fs_sgc_z3.use_nuisance =['norm','b^{(2)}_1','b^{(2)}_2','b^{(2)}_{G_2}','c^{(2)}_{0}','c^{(2)}_{2}','P^{(2)}_{shot}','b^{(2)}_4']
