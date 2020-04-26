@@ -1,0 +1,155 @@
+#------Experiments to test (separated with commas)-----
+
+data.experiments=['euclid_P1loopAP','euclid_B1loop','fake_planck_realistic_mnu01']
+
+#------ Settings for the over-sampling.
+# The first element will always be set to 1, for it is the sampling of the
+# cosmological parameters. The other numbers describe the over sampling of the
+# nuisance parameter space. This array must have the same dimension as the
+# number of blocks in your run (so, 1 for cosmological parameters, and then 1
+# for each experiment with varying nuisance parameters).
+# Note that when using Planck likelihoods, you definitely want to use [1, 4],
+# to oversample as much as possible the 14 nuisance parameters.
+# Remember to order manually the experiments from slowest to fastest (putting
+# Planck as the first set of experiments should be a safe bet, except if you
+# also have LSS experiments).
+# If you have experiments without nuisance, you do not need to specify an
+# additional entry in the over_sampling list (notice for instance that, out of
+# the three Planck likelihoods used, only Planck_highl requires nuisance
+# parameters, therefore over_sampling has a length of two (cosmology, plus one
+# set of nuisance).
+data.over_sampling=[1,1,1]
+
+#------ Parameter list -------
+
+# data.parameters[class name] = [mean, min, max, 1-sigma, scale, role]
+# - if min max irrelevant, put to None
+# - if fixed, put 1-sigma to 0
+# - if scale irrelevant, put to 1, otherwise to the appropriate factor
+# - role is either 'cosmo', 'nuisance' or 'derived'. You should put the derived
+# parameters at the end, and in case you are using the `-j fast` Cholesky
+# decomposition, you should order your nuisance parameters from slowest to
+# fastest.
+
+# Cosmological parameters list
+
+data.parameters['m_ncdm']      = [ 0.1,   0., 1.,  0.05, 1, 'cosmo']
+data.parameters['h']            = [0.6736,  -1,-1, 0.02,1,   'cosmo']
+data.parameters['omega_b']      = [ 2.237,   None, None,  0.03, 0.01, 'cosmo']
+data.parameters['omega_cdm']    = [0.12,   None, None, 0.001,    1, 'cosmo']
+data.parameters['n_s']          = [0.9649,   None, None, 0.02,    1, 'cosmo']
+
+# Nuisance parameter list, same call, except the name does not have to be a class name
+
+data.parameters['norm']         = [     1,    None,  None,     0.03,     1,'nuisance']
+
+data.parameters['b1_1']         = [     1.14,    None,  None,     0.03,     1,'nuisance']
+data.parameters['b1_2']         = [     1.22,    None,  None,     0.03,     1,'nuisance']
+data.parameters['b1_3']         = [     1.3,    None,  None,     0.03,     1,'nuisance']
+data.parameters['b1_4']         = [     1.38,    None,  None,     0.03,     1,'nuisance']
+data.parameters['b1_5']         = [     1.46,    None,  None,     0.03,     1,'nuisance']
+data.parameters['b1_6']         = [     1.54,    None,  None,     0.03,     1,'nuisance']
+data.parameters['b1_7']         = [     1.62,    None,  None,     0.03,     1,'nuisance']
+data.parameters['b1_8']         = [     1.7,    None,  None,     0.03,     1,'nuisance']
+
+data.parameters['b2_1']         = [     -0.76474550208000003,    None,  None,     0.06,     1,'nuisance']
+data.parameters['b2_2']         = [     -0.75738067456000002,    None,  None,     0.06,     1,'nuisance']
+data.parameters['b2_3']         = [     -0.73685487999999999,    None,  None,     0.06,     1,'nuisance']
+data.parameters['b2_4']         = [     -0.70353833664000009,    None,  None,     0.06,     1,'nuisance']
+data.parameters['b2_5']         = [     -0.65780126272000006,    None,  None,     0.06,     1,'nuisance']
+data.parameters['b2_6']         = [     -0.60001387648000026,    None,  None,     0.06,     1,'nuisance']
+data.parameters['b2_7']         = [     -0.53054639616000021,    None,  None,     0.06,     1,'nuisance']
+data.parameters['b2_8']         = [     -0.44976904000000001,    None,  None,     0.06,     1,'nuisance']
+
+data.parameters['bG2_1']         = [     -0.040000000000000036,    None,  None,     0.03,     1,'nuisance']
+data.parameters['bG2_2']         = [     -0.062857142857142848,    None,  None,     0.03,     1,'nuisance']
+data.parameters['bG2_3']         = [     -0.085714285714285729,    None,  None,     0.03,     1,'nuisance']
+data.parameters['bG2_4']         = [     -0.10857142857142854,    None,  None,     0.03,     1,'nuisance']
+data.parameters['bG2_5']         = [     -0.13142857142857142,    None,  None,     0.03,     1,'nuisance']
+data.parameters['bG2_6']         = [     -0.15428571428571428,    None,  None,     0.03,     1,'nuisance']
+data.parameters['bG2_7']         = [     -0.17714285714285716,    None,  None,     0.03,     1,'nuisance']
+data.parameters['bG2_8']         = [     -0.2,    None,  None,     0.03,     1,'nuisance']
+
+data.parameters['css0_1']         = [     13.397952751152456,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css0_2']         = [     11.060777605400554,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css0_3']         = [     9.2356948253476787,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css0_4']         = [     7.7994441075599523,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css0_5']         = [     6.6575880766366584,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css0_6']         = [     5.739614400882167,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css0_7']         = [     4.9933103551011682,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css0_8']         = [     4.3799733284820075,    None,  None,     0.01,     1,'nuisance']
+
+data.parameters['css2_1']         = [     13.397952751152456,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css2_2']         = [     11.060777605400554,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css2_3']         = [     9.2356948253476787,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css2_4']         = [     7.7994441075599523,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css2_5']         = [     6.6575880766366584,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css2_6']         = [     5.739614400882167,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css2_7']         = [     4.9933103551011682,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css2_8']         = [     4.3799733284820075,    None,  None,     0.01,     1,'nuisance']
+
+data.parameters['css4_1']         = [     0.53591811004609824,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css4_2']         = [     0.44243110421602216,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css4_3']         = [     0.36942779301390716,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css4_4']         = [     0.3119777643023981,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css4_5']         = [     0.26630352306546634,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css4_6']         = [     0.22958457603528667,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css4_7']         = [     0.19973241420404672,    None,  None,     0.01,     1,'nuisance']
+data.parameters['css4_8']         = [     0.17519893313928031,    None,  None,     0.01,     1,'nuisance']
+
+data.parameters['Pshot_1']         = [261.07471714755894,    None,  None,     1.2,     1,'nuisance']
+data.parameters['Pshot_2']         = [480.52001425762586,    None,  None,     1.8,     1,'nuisance']
+data.parameters['Pshot_3']         = [845.72286480359799,    None,  None,     2.2,     1,'nuisance']
+data.parameters['Pshot_4']         = [1434.831920290984,    None,  None,     2.8,     1,'nuisance']
+data.parameters['Pshot_5']         = [2549.2561545080384,    None,  None,     3.4,     1,'nuisance']
+data.parameters['Pshot_6']         = [4756.6999666317961,    None,  None,     5.8,     1,'nuisance']
+data.parameters['Pshot_7']         = [8516.3932760598509,    None,  None,     9.6,     1,'nuisance']
+data.parameters['Pshot_8']         = [14699.296052900381,    None,  None,     16.2,     1,'nuisance']
+
+data.parameters['Pshots_1']         = [68160.007933677916,    None,  None,     9.9E+04,     1,'nuisance']
+data.parameters['Pshots_2']         = [230899.48410214891,    None,  None,     1.16E+05,     1,'nuisance']
+data.parameters['Pshots_3']         = [715247.16405160492,    None,  None,     1.57E+05,     1,'nuisance']
+data.parameters['Pshots_4']         = [2058742.6394859126,    None,  None,     2.45E+05,     1,'nuisance']
+data.parameters['Pshots_5']         = [6498706.9412971111,    None,  None,     5.E+05,     1,'nuisance']
+data.parameters['Pshots_6']         = [22626194.572554927,    None,  None,     1.3E+06,     1,'nuisance']
+data.parameters['Pshots_7']         = [72528954.432517454,    None,  None,     3.6E+06,     1,'nuisance']
+data.parameters['Pshots_8']         = [216069304.4508127,    None,  None,     9.8E+06,     1,'nuisance']
+
+# Derived parameters
+
+data.parameters['Omega_m']    = [1, None, None, 0,     1,   'derived']
+data.parameters['A_s']             = [0, None, None, 0,  1e-9,   'derived']
+data.parameters['sigma8']          = [0, None, None, 0,     1,   'derived']
+
+# Other cosmo parameters (fixed parameters, precision parameters, etc.)
+
+data.cosmo_arguments['ln10^{10}A_s'] = 3.044
+data.cosmo_arguments['tau_reio'] = 0.0544
+
+#data.cosmo_arguments['N_eff'] = 3.04
+data.cosmo_arguments['N_eff'] = 2.0328
+data.cosmo_arguments['N_ncdm'] = 1
+
+data.cosmo_arguments['YHe'] = 0.25
+data.cosmo_arguments['k_pivot'] = 0.05
+data.cosmo_arguments['output'] = 'mPk,tCl,lCl'
+data.cosmo_arguments['lensing'] = 'yes'
+data.cosmo_arguments['l_max_scalars'] = '3000'
+data.cosmo_arguments['output format'] = 'FAST'
+data.cosmo_arguments['FFTLog mode'] = 'long'
+data.cosmo_arguments['P_k_max_h/Mpc'] = 100.
+data.cosmo_arguments['T_cmb'] = ' 2.7255 '
+data.cosmo_arguments['alpha_s'] = ' 0. '
+data.cosmo_arguments['non linear'] = ' SPT '
+data.cosmo_arguments['IR resummation'] = ' Yes '
+data.cosmo_arguments['Bias tracers'] = ' Yes '
+data.cosmo_arguments['RSD'] = ' Yes '
+data.cosmo_arguments['AP'] = ' Yes '
+data.cosmo_arguments['Omfid'] = ' 0.3161383063349642 '
+data.cosmo_arguments['z_pk'] = '0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0'
+data.cosmo_arguments['z_max_pk'] = '10.'
+
+#------ Mcmc parameters ----
+
+data.N=10
+data.write_step=5

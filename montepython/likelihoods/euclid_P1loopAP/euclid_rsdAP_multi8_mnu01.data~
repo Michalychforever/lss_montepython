@@ -1,0 +1,14 @@
+#euclid_RSD_multi8_mnu01.data_directory = data.path['data']
+euclid_rsdAP_multi8_mnu01.data_directory = 'data/euclid_rsdAP_multi8_mnu01'
+##euclid_rsdAP_multi8_mnu01.data_directory = 'data/euclid_rsdAP_multi8_mnu01_alpha'
+
+euclid_rsdAP_multi8_mnu01.measurements_file = ['fid_spect_z1.dat','fid_spect_z2.dat','fid_spect_z3.dat','fid_spect_z4.dat','fid_spect_z5.dat','fid_spect_z6.dat','fid_spect_z7.dat','fid_spect_z8.dat']
+
+euclid_rsdAP_multi8_mnu01.covmat_file = ['inv_cov_matrix_z1.dat','inv_cov_matrix_z2.dat','inv_cov_matrix_z3.dat','inv_cov_matrix_z4.dat','inv_cov_matrix_z5.dat','inv_cov_matrix_z6.dat','inv_cov_matrix_z7.dat','inv_cov_matrix_z8.dat']
+
+euclid_rsdAP_multi8_mnu01.zsize = 8
+euclid_rsdAP_multi8_mnu01.ksize = 40
+euclid_rsdAP_multi8_mnu01.z      = [0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0]
+euclid_rsdAP_multi8_mnu01.sigma  = 0.0174
+#euclid_rsdAP_multi8_mnu01.use_nuisance = ['norm','b1_1','b1_2','b1_3','b1_4','b1_5','b1_6','b1_7','b1_8','b2_1','b2_2','b2_3','b2_4','b2_5','b2_6','b2_7','b2_8','bG2_1','bG2_2','bG2_3','bG2_4','bG2_5','bG2_6','bG2_7','bG2_8','bGamma3_1','bGamma3_2','bGamma3_3','bGamma3_4','bGamma3_5','bGamma3_6','bGamma3_7','bGamma3_8','css0_1','css0_2','css0_3','css0_4','css0_5','css0_6','css0_7','css0_8','css2_1','css2_2','css2_3','css2_4','css2_5','css2_6','css2_7','css2_8','css4_1','css4_2','css4_3','css4_4','css4_5','css4_6','css4_7','css4_8','Pshot_1','Pshot_2','Pshot_3','Pshot_4','Pshot_5','Pshot_6','Pshot_7','Pshot_8']
+euclid_rsdAP_multi8_mnu01.use_nuisance = ['norm','b1_1','b1_2','b1_3','b1_4','b1_5','b1_6','b1_7','b1_8','b2_1','b2_2','b2_3','b2_4','b2_5','b2_6','b2_7','b2_8','bG2_1','bG2_2','bG2_3','bG2_4','bG2_5','bG2_6','bG2_7','bG2_8','css0_1','css0_2','css0_3','css0_4','css0_5','css0_6','css0_7','css0_8','css2_1','css2_2','css2_3','css2_4','css2_5','css2_6','css2_7','css2_8','css4_1','css4_2','css4_3','css4_4','css4_5','css4_6','css4_7','css4_8','Pshot_1','Pshot_2','Pshot_3','Pshot_4','Pshot_5','Pshot_6','Pshot_7','Pshot_8']

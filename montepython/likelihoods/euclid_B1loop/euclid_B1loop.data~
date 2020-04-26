@@ -1,0 +1,7 @@
+euclid_B1loop.data_directory = 'data/euclid_B1loop'
+euclid_B1loop.measurements_file = ['fid_spect_z1.dat','fid_spect_z2.dat','fid_spect_z3.dat','fid_spect_z4.dat','fid_spect_z5.dat','fid_spect_z6.dat','fid_spect_z7.dat','fid_spect_z8.dat']
+euclid_B1loop.covmat_file = ['inv_cov_matrix_z1.dat','inv_cov_matrix_z2.dat','inv_cov_matrix_z3.dat','inv_cov_matrix_z4.dat','inv_cov_matrix_z5.dat','inv_cov_matrix_z6.dat','inv_cov_matrix_z7.dat','inv_cov_matrix_z8.dat']
+euclid_B1loop.zsize = 8
+euclid_B1loop.ksize = 20
+euclid_B1loop.z      = [0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0]
+euclid_B1loop.use_nuisance = ['norm','b1_1','b1_2','b1_3','b1_4','b1_5','b1_6','b1_7','b1_8','b2_1','b2_2','b2_3','b2_4','b2_5','b2_6','b2_7','b2_8','bG2_1','bG2_2','bG2_3','bG2_4','bG2_5','bG2_6','bG2_7','bG2_8','Pshot_1','Pshot_2','Pshot_3','Pshot_4','Pshot_5','Pshot_6','Pshot_7','Pshot_8','Pshots_1','Pshots_2','Pshots_3','Pshots_4','Pshots_5','Pshots_6','Pshots_7','Pshots_8']
