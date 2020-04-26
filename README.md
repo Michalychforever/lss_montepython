@@ -2,7 +2,7 @@
 
 **Contributors:** Mikhail (Misha) Ivanov, Anton Chudaykin, Oliver Philcox 
 
-These are various large-scale structure likelihoods for the MCMC sampler [Montepython](https://github.com/brinckmann/montepython_public) that were analyzed in in the papers 
+These are various large-scale structure likelihoods for the MCMC sampler [Montepython](https://github.com/brinckmann/montepython_public) that were analyzed in the papers 
 
 * [*Measuring neutrino masses with large-scale structure: Euclid forecast with controlled theoretical error*](https://arxiv.org/abs/1907.06666)
 * [*Cosmological Parameters from the BOSS Galaxy Power Spectrum*](https://arxiv.org/abs/1909.05277)
