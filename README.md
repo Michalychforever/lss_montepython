@@ -2,7 +2,7 @@
 
 **Contributors:** Mikhail (Misha) Ivanov, Anton Chudaykin, Oliver Philcox 
 
-These are the custom-built [BOSS DR12](https://arxiv.org/abs/1607.03155) galaxy power spectrum likelihoods for the MCMC sampler [Montepython](https://github.com/brinckmann/montepython_public) that were analyzed in the papers 
+These are various large-scale structure likelihoods for the MCMC sampler [Montepython](https://github.com/brinckmann/montepython_public) that were analyzed in in the papers 
 
 * [*Measuring neutrino masses with large-scale structure: Euclid forecast with controlled theoretical error*](https://arxiv.org/abs/1907.06666)
 * [*Cosmological Parameters from the BOSS Galaxy Power Spectrum*](https://arxiv.org/abs/1909.05277)
@@ -11,8 +11,8 @@ These are the custom-built [BOSS DR12](https://arxiv.org/abs/1607.03155) galaxy 
 
 The repo includes: 
 
-* Euclid forecast for power spectrum and bispectrum likelihoods in eight independent redshift bins from z=0.6 to z=2 with one-loop or two-loop theoretical error covariances
-* Pre-reconstructed full-shape (FS) power spectrum likelihods for four independent data chunks: North and South Galactic Caps (NGC and SGC) at z=0.38 and z=0.61
+* Mock power spectrum and bispectrum likelihoods for a Euclid-like survey spanning over eight redshift bins from z=0.6 to z=2 with one-loop or two-loop theoretical error covariances
+* Custom-built [BOSS DR12](https://arxiv.org/abs/1607.03155) pre-reconstructed full-shape (FS) power spectrum likelihods for four independent data chunks: North and South Galactic Caps (NGC and SGC) at z=0.38 and z=0.61
 * BAO-only likelihood that extracts the anisotropic BAO signal from the post-reconstructed power spectra
 * Joint FS+BAO likelihoods with the appropriate covariance matrices for the same data chunks
 
