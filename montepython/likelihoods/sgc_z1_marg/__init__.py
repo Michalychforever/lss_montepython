@@ -221,16 +221,14 @@ class sgc_z1_marg(Likelihood_prior):
         Pshotmean = 0.
         Nmarg = 4 # number of parameters to marginalize
 
-        theory0vec = np.zeros((Nmax,Nmarg+1))
-        theory2vec = np.zeros((Nmax,Nmarg+1))
-
         # Run CLASS-PT
         all_theory = cosmo.get_pk_mult(self.kbins3*h,self.z, Nmax)
 
         # Compute usual theory model
         kinloop1 = self.kbins3 * h
 
-        theory2 = (norm**2.*all_theory[18] +norm**4.*(all_theory[24])+ norm**1.*b1*all_theory[19] +norm**3.*b1*(all_theory[25]) + b1**2.*norm**2.*all_theory[26] +b1*b2*norm**2.*all_theory[9])*h**3. + fz**2.*b4mean*self.kbins3**2.*((norm**2.*fz**2.*70. + 165.*fz*b1*norm+99.*b1**2.)*4./693.)*(35./8.)*all_theory[13]*h
+        theory2 = (norm**2.*all_theory[18] +norm**4.*(all_theory[24])+ norm**1.*b1*all_theory[19] +norm**3.*b1*(all_theory[25]) + b1**2.*norm**2.*all_theory[26] +b1*b2*norm**2.*all_theory[34]+ b2*norm**3.*all_theory[35] + b1*bG2*norm**2.*all_theory[36]+ bG2*norm**3.*all_theory[37]  + 2.*(css2mean + 0.*b4mean*kinloop1**2.)*norm**2.*all_theory[12]/h**2. + (2.*bG2+0.8*bGamma3)*norm**3.*all_theory[9])*h**3. + fz**2.*b4mean*self.kbins3**2.*((norm**2.*fz**2.*70. + 165.*fz*b1*norm+99.*b1**2.)*4./693.)*(35./8.)*all_theory[13]*h
+
         theory0 = (norm**2.*all_theory[15] +norm**4.*(all_theory[21])+ norm**1.*b1*all_theory[16] +norm**3.*b1*(all_theory[22]) + norm**0.*b1**2.*all_theory[17] +norm**2.*b1**2.*all_theory[23] + 0.25*norm**2.*b2**2.*all_theory[1] +b1*b2*norm**2.*all_theory[30]+ b2*norm**3.*all_theory[31] + b1*bG2*norm**2.*all_theory[32]+ bG2*norm**3.*all_theory[33] + b2*bG2*norm**2.*all_theory[4]+ bG2**2.*norm**2.*all_theory[5] + 2.*css0mean*norm**2.*all_theory[11]/h**2. + (2.*bG2+0.8*bGamma3)*norm**2.*(b1*all_theory[7]+norm*all_theory[8]))*h**3.+Pshotmean + fz**2.*b4mean*self.kbins3**2.*(norm**2.*fz**2./9. + 2.*fz*b1*norm/7. + b1**2./5)*(35./8.)*all_theory[13]*h
 
         # Pieces with linear dependencies on biases
