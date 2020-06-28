@@ -1,0 +1,8 @@
+ngc_z1_marg.data_directory = data.path['data']
+ngc_z1_marg.covmat_file = 'ngc_z1/covmat.dat'
+ngc_z1_marg.window_file = 'ngc_z1/window.dat'
+ngc_z1_marg.measurements_file = 'ngc_z1/pk.dat'
+
+ngc_z1_marg.ksize = 48
+ngc_z1_marg.z      = 0.38
+ngc_z1_marg.use_nuisance =['norm','b^{(3)}_1','b^{(3)}_2','b^{(3)}_{G_2}']
