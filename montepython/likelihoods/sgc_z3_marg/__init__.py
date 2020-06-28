@@ -267,7 +267,7 @@ class sgc_z3_marg(Likelihood_prior):
         chi2 += -2.*np.inner(Pdisc[:,0],np.inner(invcovW,self.stack_dat))
 
         # Add priors
-        chi2 += chi2 + (b2 - 0.)**2./1**2. + (bG2 - 0.)**2/1**2. #+ (css0)**2/30**2 + css2**2/30**2 + (b4-500.)**2/500**2 + (Pshot - 5e3)**2./(5e3)**2.
+        chi2 += (b2 - 0.)**2./1**2. + (bG2 - 0.)**2/1**2. #+ (css0)**2/30**2 + css2**2/30**2 + (b4-500.)**2/500**2 + (Pshot - 5e3)**2./(5e3)**2.
 
         # Add determinants (depending on cosmology)
         chi2 += np.linalg.slogdet(marg_cov)[1] - self.logdetcov # add on trace-log part and remove unmarginalized part (independent of cosmology)
