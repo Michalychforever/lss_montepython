@@ -1,0 +1,13 @@
+bao_fs_ngc_z3_marg.data_directory = data.path['data']
+bao_fs_ngc_z3_marg.measurements_file = 'ngc_z3/pk.dat'
+bao_fs_ngc_z3_marg.covmat_file = 'ngc_z3/ngc_z3_unrec_mon+quad+alphas_cov_48bins.dat'
+bao_fs_ngc_z3_marg.window_file = 'ngc_z3/window.dat'
+bao_fs_ngc_z3_marg.alpha_means = 'ngc_z3/alpha_means.dat'
+bao_fs_ngc_z3_marg.rdHfid = 0.046932401774762225
+bao_fs_ngc_z3_marg.rdDAfid = 0.1031183538734282
+
+bao_fs_ngc_z3_marg.ksize = 48
+bao_fs_ngc_z3_marg.z      = 0.61
+bao_fs_ngc_z3_marg.use_nuisance =['b^{(1)}_1','b^{(1)}_2','b^{(1)}_{G_2}']
+###bao_fs_ngc_z3_marg.use_nuisance =['norm','b_1','b_2','b_G_2']
+###bao_fs_ngc_z3_marg.use_nuisance =['norm','b^{(1)}_1','b^{(1)}_2','b^{(1)}_{G_2}']
