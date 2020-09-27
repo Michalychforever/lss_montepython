@@ -122,9 +122,9 @@ class bao_fs_sgc_z1_marg(Likelihood_prior):
 
         h = cosmo.h()
 
-        norm = (data.mcmc_parameters['norm']['current'] *
-                 data.mcmc_parameters['norm']['scale'])
-        #norm = 1.
+        #norm = (data.mcmc_parameters['norm']['current'] *
+        #         data.mcmc_parameters['norm']['scale'])
+        norm = 1.
         i_s=repr(4)
         b1 = (data.mcmc_parameters['b^{('+i_s+')}_1']['current'] *
              data.mcmc_parameters['b^{('+i_s+')}_1']['scale'])

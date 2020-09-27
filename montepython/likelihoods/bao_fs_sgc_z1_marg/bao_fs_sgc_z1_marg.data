@@ -9,6 +9,6 @@ bao_fs_sgc_z1_marg.rdDAfid = 0.13325653008234437
 
 bao_fs_sgc_z1_marg.ksize = 48
 bao_fs_sgc_z1_marg.z      = 0.38
-###bao_fs_sgc_z1_marg.use_nuisance =['b^{(4)}_1','b^{(4)}_2','b^{(4)}_{G_2}']
+bao_fs_sgc_z1_marg.use_nuisance =['b^{(4)}_1','b^{(4)}_2','b^{(4)}_{G_2}']
 ###bao_fs_sgc_z1_marg.use_nuisance =['norm','b_1','b_2','b_G_2']
-bao_fs_sgc_z1_marg.use_nuisance =['norm','b^{(4)}_1','b^{(4)}_2','b^{(4)}_{G_2}']
+###bao_fs_sgc_z1_marg.use_nuisance =['norm','b^{(4)}_1','b^{(4)}_2','b^{(4)}_{G_2}']
