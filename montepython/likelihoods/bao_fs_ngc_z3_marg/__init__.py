@@ -199,7 +199,7 @@ class bao_fs_ngc_z3_marg(Likelihood_prior):
         cmsym2 = np.zeros((Nmax+1,Nmarg+1),dtype=np.complex_)
 
         all_i = np.arange(Nmax+1)
-        f = np.asarray(all_i+2-Nmax/2) < 1,dtype=int)
+        f = np.asarray((all_i+2-Nmax/2) < 1,dtype=int)
         k0t1 = (k0**(-self.etam[f]))[:,np.newaxis]
         k0t2 = (k0**(-self.etam[~f]))[:,np.newaxis]
         cmsym0[f] = k0t1*np.conjugate(cm0[-all_i[f]+Nmax/2])
