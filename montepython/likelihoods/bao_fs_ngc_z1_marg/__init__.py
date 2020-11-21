@@ -89,7 +89,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
         self.tmp_factor = exp(-1.*b*i_arr*Delta)
         self.tmp_factor2 = exp(-1.*bR*i_arr*Delta_r)[:,np.newaxis]
 
-        jsNm = np.arange(-self.Nmax/2,self.Nmax/2+1,1)
+        jsNm = np.arange(-self.Nmax//2,self.Nmax//2+1,1)
         self.etam = b + 2*1j*pi*(jsNm)/self.Nmax/Delta
 
         def J_func(r,nu):
@@ -225,13 +225,13 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
         cmsym2 = np.zeros((Nmax+1,Nmarg+1),dtype=np.complex_)
 
         all_i = np.arange(Nmax+1)
-        f = (all_i+2-Nmax/2) < 1
+        f = (all_i+2-Nmax//2) < 1
         k0t1 = (k0**(-self.etam[f]))[:,np.newaxis]
         k0t2 = (k0**(-self.etam[~f]))[:,np.newaxis]
-        cmsym0[f] = k0t1*np.conjugate(cm0[-all_i[f]+Nmax/2])
-        cmsym2[f] = k0t1*np.conjugate(cm2[-all_i[f]+Nmax/2])
-        cmsym0[~f] = k0t2*cm0[all_i[~f]-Nmax/2]
-        cmsym2[~f] = k0t2*cm2[all_i[~f]-Nmax/2]
+        cmsym0[f] = k0t1*np.conjugate(cm0[-all_i[f]+Nmax//2])
+        cmsym2[f] = k0t1*np.conjugate(cm2[-all_i[f]+Nmax//2])
+        cmsym0[~f] = k0t2*cm0[all_i[~f]-Nmax//2]
+        cmsym2[~f] = k0t2*cm2[all_i[~f]-Nmax//2]
 
         cmsym0[-1] = cmsym0[-1] / 2
         cmsym0[0] = cmsym0[0] / 2
@@ -251,13 +251,13 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
         cmsymr2 = np.zeros((Nmax+1,Nmarg+1),dtype=np.complex_)
 
         arr_i = np.arange(Nmax+1)
-        f = (arr_i+2-Nmax/2)<1
+        f = (arr_i+2-Nmax//2)<1
         r0t1 = self.rmin**(-self.etamR[f])[:,np.newaxis]
         r0t2 = self.rmin**(-self.etamR[~f])[:,np.newaxis]
-        cmsymr0[f] = r0t1*np.conjugate(cmr0[-arr_i[f] + Nmax/2])
-        cmsymr2[f] = r0t1*np.conjugate(cmr2[-arr_i[f] + Nmax/2])
-        cmsymr0[~f] = r0t2*cmr0[arr_i[~f] - Nmax/2]
-        cmsymr2[~f] = r0t2*cmr2[arr_i[~f] - Nmax/2]
+        cmsymr0[f] = r0t1*np.conjugate(cmr0[-arr_i[f] + Nmax//2])
+        cmsymr2[f] = r0t1*np.conjugate(cmr2[-arr_i[f] + Nmax//2])
+        cmsymr0[~f] = r0t2*cmr0[arr_i[~f] - Nmax//2]
+        cmsymr2[~f] = r0t2*cmr2[arr_i[~f] - Nmax//2]
 
         cmsymr0[-1] = cmsymr0[-1] / 2
         cmsymr0[0] = cmsymr0[0] / 2
