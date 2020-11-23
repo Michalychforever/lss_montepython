@@ -16,11 +16,12 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
     # Likelihood class.
 
     def __init__(self,path,data,command_line):
+        """Initialize the function, loading data and other useful functions that can be precomputed"""
 
         Likelihood_prior.__init__(self,path,data,command_line)
 
-        # First load in data
-
+        ## LOAD IN DATA
+        
         self.k = np.zeros(self.ksize,'float64')
         self.Pk0 = np.zeros(self.ksize,'float64')
         self.Pk2 = np.zeros(self.ksize,'float64')
@@ -29,6 +30,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
         self.cov = np.zeros(
             (2*self.ksize+2, 2*self.ksize+2), 'float64')
 
+        # Load covariance matrix
         datafile = open(os.path.join(self.data_directory, self.covmat_file), 'r')
         for i in range(2*self.ksize+2):
             line = datafile.readline()
@@ -38,6 +40,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
                 self.cov[i,j] = float(line.split()[j])
         datafile.close()
 
+        # Load unreconstructed power spectrum
         datafile = open(os.path.join(self.data_directory, self.measurements_file), 'r')
         for i in range(self.ksize):
             line = datafile.readline()
@@ -48,7 +51,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
             self.Pk2[i] = float(line.split()[2])
         datafile.close()
 
-
+        # Load measured Alcock-Paczynski parameters from reconstructed data
         datafile = open(os.path.join(self.data_directory, self.alpha_means), 'r')
         for i in range(2):
             line = datafile.readline()
@@ -57,6 +60,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
             self.alphas[i] = float(line.split()[0])
         datafile.close()
 
+        ## LOAD OTHER USEFUL FUNCTIONS
         self.Nmax=128
         self.W0 = np.zeros((self.Nmax,1))
         self.W2 = np.zeros((self.Nmax,1))
@@ -119,11 +123,11 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
         self.J2k_arr = j2k[:,:,np.newaxis]
 
     def loglkl(self, cosmo, data):
+        """Compute the log-likelihood of the model, given the data and covariance"""
 
+        ## First load in cosmological and explicitly-sampled nuisance parameters at this MCMC step
         h = cosmo.h()
 
-#        norm = (data.mcmc_parameters['norm']['current'] *
-#                 data.mcmc_parameters['norm']['scale'])
         norm = 1.
         i_s=repr(3)
         b1 = (data.mcmc_parameters['b^{('+i_s+')}_1']['current'] *
@@ -132,13 +136,6 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
              data.mcmc_parameters['b^{('+i_s+')}_2']['scale'])
         bG2 = (data.mcmc_parameters['b^{('+i_s+')}_{G_2}']['current'] *
              data.mcmc_parameters['b^{('+i_s+')}_{G_2}']['scale'])
-
-#        b1 = (data.mcmc_parameters['b_1']['current'] *
-#             data.mcmc_parameters['b_1']['scale'])
-#        b2 = (data.mcmc_parameters['b_2']['current'] *
-#             data.mcmc_parameters['b_2']['scale'])
-#        bG2 = (data.mcmc_parameters['b_G_2']['current'] *
-#             data.mcmc_parameters['b_G_2']['scale'])
 
         bGamma3 = 0.
         a2 = 0.
@@ -150,6 +147,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
 
         assert bGamma3 == 0., 'bGamma3 has been set to zero in the derivatives'
 
+        # Now load in (mean, sigma) for nuisance parameters that are analytically marginalized over
         css0sig = 30.
         css2sig = 30.
         b4sig = 500.
@@ -158,47 +156,24 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
         css2mean = 0.
         b4mean = 500.
         Pshotmean = 0.
-        Nmarg = 4 # number of parameters to marginalize
+        Nmarg = 4 # number of parameters to marginalize over analytically
 
         theory0vec = np.zeros((Nmax,Nmarg+1))
         theory2vec = np.zeros((Nmax,Nmarg+1))
-
-# COMMENTED OLD PART STARTS HERE
-#        for i in range(Nmax):
-#            kinloop1 = self.kbins3[i] * h
-
-            # Compute usual theory model
-#            theory2 = (norm**2.*cosmo.pk(kinloop1, self.z)[18] +norm**4.*(cosmo.pk(kinloop1, self.z)[24])+ norm**1.*b1*cosmo.pk(kinloop1, self.z)[19] +norm**3.*b1*(cosmo.pk(kinloop1, self.z)[25]) + b1**2.*norm**2.*cosmo.pk(kinloop1, self.z)[26] +b1*b2*norm**2.*cosmo.pk(kinloop1, self.z)[34]+ b2*norm**3.*cosmo.pk(kinloop1, self.z)[35] + b1*bG2*norm**2.*cosmo.pk(kinloop1, self.z)[36]+ bG2*norm**3.*cosmo.pk(kinloop1, self.z)[37]  + 2.*(css2mean + 0.*b4mean*kinloop1**2.)*norm**2.*cosmo.pk(kinloop1, self.z)[12]/h**2. + (2.*bG2+0.8*bGamma3)*norm**3.*cosmo.pk(kinloop1, self.z)[9])*h**3. + fz**2.*b4mean*self.kbins3[i]**2.*((norm**2.*fz**2.*70. + 165.*fz*b1*norm+99.*b1**2.)*4./693.)*(35./8.)*cosmo.pk(kinloop1, self.z)[13]*h
-
-#            theory0 = (norm**2.*cosmo.pk(kinloop1, self.z)[15] +norm**4.*(cosmo.pk(kinloop1, self.z)[21])+ norm**1.*b1*cosmo.pk(kinloop1, self.z)[16] +norm**3.*b1*(cosmo.pk(kinloop1, self.z)[22]) + norm**0.*b1**2.*cosmo.pk(kinloop1, self.z)[17] +norm**2.*b1**2.*cosmo.pk(kinloop1, self.z)[23] + 0.25*norm**2.*b2**2.*cosmo.pk(kinloop1, self.z)[1] +b1*b2*norm**2.*cosmo.pk(kinloop1, self.z)[30]+ b2*norm**3.*cosmo.pk(kinloop1, self.z)[31] + b1*bG2*norm**2.*cosmo.pk(kinloop1, self.z)[32]+ bG2*norm**3.*cosmo.pk(kinloop1, self.z)[33] + b2*bG2*norm**2.*cosmo.pk(kinloop1, self.z)[4]+ bG2**2.*norm**2.*cosmo.pk(kinloop1, self.z)[5] + 2.*css0mean*norm**2.*cosmo.pk(kinloop1, self.z)[11]/h**2. + (2.*bG2+0.8*bGamma3)*norm**2.*(b1*cosmo.pk(kinloop1, self.z)[7]+norm*cosmo.pk(kinloop1, self.z)[8]))*h**3.+Pshotmean + fz**2.*b4mean*self.kbins3[i]**2.*(norm**2.*fz**2./9. + 2.*fz*b1*norm/7. + b1**2./5)*(35./8.)*cosmo.pk(kinloop1, self.z)[13]*h
-
-            # Pieces with linear dependencies on biases
-#            dtheory2_dcss0 = 0.
-#            dtheory2_dcss2 = (2.*norm**2.*cosmo.pk(kinloop1, self.z)[12]/h**2.)*h**3.
-#            dtheory2_db4 = (2.*(0.*kinloop1**2.)*norm**2.*cosmo.pk(kinloop1, self.z)[12]/h**2.)*h**3. + fz**2.*self.kbins3[i]**2.*((norm**2.*fz**2.*70. + 165.*fz*b1*norm+99.*b1**2.)*4./693.)*(35./8.)*cosmo.pk(kinloop1, self.z)[13]*h
-#            dtheory2_dPshot = 0.
-
-#            dtheory0_dcss0 = (2.*norm**2.*cosmo.pk(kinloop1, self.z)[11]/h**2.)*h**3.
-#            dtheory0_dcss2 = 0.
-#            dtheory0_db4 = fz**2.*self.kbins3[i]**2.*(norm**2.*fz**2./9. + 2.*fz*b1*norm/7. + b1**2./5)*(35./8.)*cosmo.pk(kinloop1, self.z)[13]*h
-#            dtheory0_dPshot = 1.
-
-            # Put all into a vector for simplicity
-#            theory0vec[i] = np.asarray([theory0,dtheory0_dcss0,dtheory0_dcss2,dtheory0_db4,dtheory0_dPshot])
-#            theory2vec[i] = np.asarray([theory2,dtheory2_dcss0,dtheory2_dcss2,dtheory2_db4,dtheory2_dPshot])
-# COMMENTED OLD PART ENDS HERE
-
-# Run CLASS-PT
+    
+        ## COMPUTE SPECTRA
+        # Run CLASS-PT to get all components
         all_theory = cosmo.get_pk_mult(self.kbins3*h,self.z, Nmax)
 
         # Compute usual theory model
         kinloop1 = self.kbins3 * h
-
+        
+        # Generate the full theory model evaluated at the nuisance parameter means
         theory2 = (norm**2.*all_theory[18] +norm**4.*(all_theory[24])+ norm**1.*b1*all_theory[19] +norm**3.*b1*(all_theory[25]) + b1**2.*norm**2.*all_theory[26] + b1*b2*norm**2.*all_theory[34]+ b2*norm**3.*all_theory[35] + b1*bG2*norm**2.*all_theory[36]+ bG2*norm**3.*all_theory[37]  + 2.*(css2mean)*norm**2.*all_theory[12]/h**2. + (2.*bG2+0.8*bGamma3)*norm**3.*all_theory[9])*h**3. + fz**2.*b4mean*self.kbins3**2.*((norm**2.*fz**2.*70. + 165.*fz*b1*norm+99.*b1**2.)*4./693.)*(35./8.)*all_theory[13]*h
 
         theory0 = (norm**2.*all_theory[15] +norm**4.*(all_theory[21])+ norm**1.*b1*all_theory[16] +norm**3.*b1*(all_theory[22]) + norm**0.*b1**2.*all_theory[17] +norm**2.*b1**2.*all_theory[23] + 0.25*norm**2.*b2**2.*all_theory[1] +b1*b2*norm**2.*all_theory[30]+ b2*norm**3.*all_theory[31] + b1*bG2*norm**2.*all_theory[32]+ bG2*norm**3.*all_theory[33] + b2*bG2*norm**2.*all_theory[4]+ bG2**2.*norm**2.*all_theory[5] + 2.*css0mean*norm**2.*all_theory[11]/h**2. + (2.*bG2+0.8*bGamma3)*norm**2.*(b1*all_theory[7]+norm*all_theory[8]))*h**3.+Pshotmean + fz**2.*b4mean*self.kbins3**2.*(norm**2.*fz**2./9. + 2.*fz*b1*norm/7. + b1**2./5)*(35./8.)*all_theory[13]*h
 
-        # Pieces with linear dependencies on biases
+        # Compute derivatives for nuisance parameters which enter the model linearly
         dtheory2_dcss0 = np.zeros_like(self.kbins3)
         dtheory2_dcss2 = (2.*norm**2.*all_theory[12]/h**2.)*h**3.
         dtheory2_db4 = (2.*(0.*kinloop1**2.)*norm**2.*all_theory[12]/h**2.)*h**3. + fz**2.*self.kbins3**2.*((norm**2.*fz**2.*70. + 165.*fz*b1*norm+99.*b1**2.)*4./693.)*(35./8.)*all_theory[13]*h
@@ -213,7 +188,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
         theory0vec = np.vstack([theory0,dtheory0_dcss0,dtheory0_dcss2,dtheory0_db4,dtheory0_dPshot]).T
         theory2vec = np.vstack([theory2,dtheory2_dcss0,dtheory2_dcss2,dtheory2_db4,dtheory2_dPshot]).T
 
-#here the old part continues
+        # Now do a Fourier-transform to include the window function
         i_arr = np.arange(Nmax)
         factor = (exp(-1.*(self.kbins3*h/2.)**4.)*self.tmp_factor)[:,np.newaxis]
         Pdiscrin0 = theory0vec*factor
@@ -270,37 +245,34 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
         P0int = np.asarray([interpolate.InterpolatedUnivariateSpline(self.kbins3,P0t[:,i])(self.k) for i in range(Nmarg+1)]).T
         P2int = np.asarray([interpolate.InterpolatedUnivariateSpline(self.kbins3,P2t[:,i])(self.k) for i in range(Nmarg+1)]).T
 
-        # Now compute marginalized covariance
+        # Compute the modified covariance matrix after including the nuisance-parameter marginalization
         dcss0_stack = np.hstack([P0int[:,1],P2int[:,1],0.,0.])
         dcss2_stack = np.hstack([P0int[:,2],P2int[:,2],0.,0.])
         db4_stack = np.hstack([P0int[:,3],P2int[:,3],0.,0.])
         dPshot_stack = np.hstack([P0int[:,4],P2int[:,4],0.,0.])
 
-        # Do in two pieces; with and without Pshot part
-        marg_covM = self.cov + css0sig**2*np.outer(dcss0_stack,dcss0_stack) + css2sig**2*np.outer(dcss2_stack,dcss2_stack) + b4sig**2*np.outer(db4_stack, db4_stack)
-        marg_covMM = marg_covM + Pshotsig**2*np.outer(dPshot_stack,dPshot_stack)
-
-        invcov_margM = np.linalg.inv(marg_covM)
+        marg_covMM = self.cov + css0sig**2*np.outer(dcss0_stack,dcss0_stack) + css2sig**2*np.outer(dcss2_stack,dcss2_stack) + b4sig**2*np.outer(db4_stack, db4_stack) + Pshotsig**2*np.outer(dPshot_stack,dPshot_stack)
         invcov_margMM = np.linalg.inv(marg_covMM)
 
-        # Now compute chi^2
+        # COMPUTE CHI^2 OF MODEL
         chi2 = 0.
 
+        # Alcock-Paczynski parameters at this cosmology [model - data]
         alphapar = self.rdHfid/(cosmo.rs_drag()*cosmo.Hubble(self.z)) - self.alphas[0]
         alphaperp = self.rdDAfid/(cosmo.rs_drag()/cosmo.angular_distance(self.z)) - self.alphas[1]
 
+        # Compute [model - data] for P(k) multipoles
         x1 = np.hstack([P0int[:,0]-self.Pk0,P2int[:,0]-self.Pk2,alphapar,alphaperp])
 
+        # Compute chi2
         chi2 = np.inner(x1,np.inner(invcov_margMM,x1));
-        chi2 = chi2 + (b2 - 0.)**2./1**2. + (bG2 - 0.)**2/1**2. #+ (css0)**2/30**2 + css2**2/30**2 + (b4-500.)**2/500**2 + (Pshot - 5e3)**2./(5e3)**2.
-
-        chi2 = chi2 + np.linalg.slogdet(marg_covMM)[1] - np.linalg.slogdet(self.cov)[1] # add on trace-log part and remove unmarginalized part (independent of cosmology)
-
-        # Add on Pshot >= 0 condition
-#        cov_tmp = np.inner(dPshot_stack,np.inner(invcov_margM,dPshot_stack))+1./Pshotsig**2.
-#        cov_tmp2 = np.inner(dPshot_stack,np.inner(invcov_margM,x1))
-#        chi2 -= np.log(1.+erf(np.sqrt(cov_tmp/2.)*(cov_tmp2/cov_tmp+Pshotmean)))
-
+        
+        # Add in priors on nuisance parameters
+        chi2 += (b2 - 0.)**2./1**2. + (bG2 - 0.)**2/1**2. 
+        
+        # Correct for the new covariance matrix determinant
+        chi2 += np.linalg.slogdet(marg_covMM)[1] - np.linalg.slogdet(self.cov)[1] 
+        
+        # Compute log-likelihood
         loglkl = -0.5 * chi2
-
         return loglkl
