@@ -97,7 +97,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
             r_pow = r**(-3.-1.*nu)
             sin_nu = np.sin(pi*nu/2.)
             J0 = -1.*sin_nu*r_pow*gam/(2.*pi**2.)
-            J2 = r_pow*(3.+nu)*gam*sin_nu/(nu*2.*pi**2.)
+            J2 = -1.*r_pow*(3.+nu)*gam*sin_nu/(nu*2.*pi**2.)
             return J0,J2
 
         j0,j2 = J_func(rtab.reshape(-1,1),self.etam.reshape(1,-1))
@@ -111,7 +111,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
             k_pow = k**(-3.-1.*nu)
             sin_nu = np.sin(pi*nu/2.)
             J0k = -1.*k_pow*gam*sin_nu*(4.*pi)
-            J2k = k_pow*(3.+nu)*gam*sin_nu*4.*pi/nu
+            J2k = -1.*k_pow*(3.+nu)*gam*sin_nu*4.*pi/nu
             return J0k,J2k
 
         j0k,j2k = Jk_func(self.kbins3.reshape(-1,1),self.etamR.reshape(1,-1))
@@ -155,7 +155,7 @@ class bao_fs_ngc_z1_marg(Likelihood_prior):
         b4sig = 500.
         Pshotsig = 5e3
         css0mean = 0.
-        css2mean = 0.
+        css2mean = 30.
         b4mean = 500.
         Pshotmean = 0.
         Nmarg = 4 # number of parameters to marginalize

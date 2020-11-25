@@ -82,7 +82,7 @@ class ngc_z3_marg(Likelihood_prior):
         self.tmp_factor = exp(-1.*b*i_arr*Delta)
         self.tmp_factor2 = exp(-1.*bR*i_arr*Delta_r)
 
-        jsNm = np.arange(-self.Nmax/2,self.Nmax/2+1,1)
+        jsNm = np.arange(-self.Nmax//2,self.Nmax//2+1,1)
         self.etam = b + 2*1j*pi*(jsNm)/self.Nmax/Delta
 
         def J_func(r,nu):
@@ -90,7 +90,7 @@ class ngc_z3_marg(Likelihood_prior):
             r_pow = r**(-3.-1.*nu)
             sin_nu = np.sin(pi*nu/2.)
             J0 = -1.*sin_nu*r_pow*gam/(2.*pi**2.)
-            J2 = r_pow*(3.+nu)*gam*sin_nu/(nu*2.*pi**2.)
+            J2 = -1.*r_pow*(3.+nu)*gam*sin_nu/(nu*2.*pi**2.)
             return J0,J2
 
         self.J0_arr,self.J2_arr = J_func(rtab.reshape(-1,1),self.etam.reshape(1,-1))
@@ -102,7 +102,7 @@ class ngc_z3_marg(Likelihood_prior):
             k_pow = k**(-3.-1.*nu)
             sin_nu = np.sin(pi*nu/2.)
             J0k = -1.*k_pow*gam*sin_nu*(4.*pi)
-            J2k = k_pow*(3.+nu)*gam*sin_nu*4.*pi/nu
+            J2k = -1.*k_pow*(3.+nu)*gam*sin_nu*4.*pi/nu
             return J0k,J2k
 
         self.J0k_arr,self.J2k_arr = Jk_func(self.kbins3.reshape(-1,1),self.etamR.reshape(1,-1))
@@ -142,11 +142,11 @@ class ngc_z3_marg(Likelihood_prior):
         cmsym2 = np.zeros(Nmax+1,dtype=np.complex_)
 
         all_i = np.arange(Nmax+1)
-        f = (all_i+2-Nmax/2) < 1
-        cmsym0[f] = k0**(-self.etam[f])*np.conjugate(cm0[-all_i[f]+Nmax/2])
-        cmsym2[f] = k0**(-self.etam[f])*np.conjugate(cm2[-all_i[f]+Nmax/2])
-        cmsym0[~f] = k0**(-self.etam[~f])*cm0[all_i[~f]-Nmax/2]
-        cmsym2[~f] = k0**(-self.etam[~f])*cm2[all_i[~f]-Nmax/2]
+        f = (all_i+2-Nmax//2) < 1
+        cmsym0[f] = k0**(-self.etam[f])*np.conjugate(cm0[-all_i[f]+Nmax//2])
+        cmsym2[f] = k0**(-self.etam[f])*np.conjugate(cm2[-all_i[f]+Nmax//2])
+        cmsym0[~f] = k0**(-self.etam[~f])*cm0[all_i[~f]-Nmax//2]
+        cmsym2[~f] = k0**(-self.etam[~f])*cm2[all_i[~f]-Nmax//2]
 
         cmsym0[-1] = cmsym0[-1] / 2
         cmsym0[0] = cmsym0[0] / 2
@@ -167,12 +167,12 @@ class ngc_z3_marg(Likelihood_prior):
         cmsymr2 = np.zeros(Nmax+1,dtype=np.complex_)
 
         arr_i = np.arange(Nmax+1)
-        f = (arr_i+2-Nmax/2)<1
+        f = (arr_i+2-Nmax//2)<1
 
-        cmsymr0[f] = self.rmin**(-self.etamR[f])*np.conjugate(cmr0[-arr_i[f] + Nmax/2])
-        cmsymr2[f] =  self.rmin**(-self.etamR[f])*np.conjugate(cmr2[-arr_i[f] + Nmax/2])
-        cmsymr0[~f] = self.rmin**(-self.etamR[~f])* cmr0[arr_i[~f] - Nmax/2]
-        cmsymr2[~f] = self.rmin**(-self.etamR[~f])* cmr2[arr_i[~f] - Nmax/2]
+        cmsymr0[f] = self.rmin**(-self.etamR[f])*np.conjugate(cmr0[-arr_i[f] + Nmax//2])
+        cmsymr2[f] =  self.rmin**(-self.etamR[f])*np.conjugate(cmr2[-arr_i[f] + Nmax//2])
+        cmsymr0[~f] = self.rmin**(-self.etamR[~f])* cmr0[arr_i[~f] - Nmax//2]
+        cmsymr2[~f] = self.rmin**(-self.etamR[~f])* cmr2[arr_i[~f] - Nmax//2]
 
         cmsymr0[-1] = cmsymr0[-1] / 2
         cmsymr0[0] = cmsymr0[0] / 2
@@ -216,7 +216,7 @@ class ngc_z3_marg(Likelihood_prior):
         b4sig = 500.
         Pshotsig = 5e3
         css0mean = 0.
-        css2mean = 0.
+        css2mean = 30.
         b4mean = 500.
         Pshotmean = 0.
         Nmarg = 4 # number of parameters to marginalize

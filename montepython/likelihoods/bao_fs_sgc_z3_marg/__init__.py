@@ -97,7 +97,7 @@ class bao_fs_sgc_z3_marg(Likelihood_prior):
             r_pow = r**(-3.-1.*nu)
             sin_nu = np.sin(pi*nu/2.)
             J0 = -1.*sin_nu*r_pow*gam/(2.*pi**2.)
-            J2 = r_pow*(3.+nu)*gam*sin_nu/(nu*2.*pi**2.)
+            J2 = -1.*r_pow*(3.+nu)*gam*sin_nu/(nu*2.*pi**2.)
             return J0,J2
 
         j0,j2 = J_func(rtab.reshape(-1,1),self.etam.reshape(1,-1))
@@ -111,7 +111,7 @@ class bao_fs_sgc_z3_marg(Likelihood_prior):
             k_pow = k**(-3.-1.*nu)
             sin_nu = np.sin(pi*nu/2.)
             J0k = -1.*k_pow*gam*sin_nu*(4.*pi)
-            J2k = k_pow*(3.+nu)*gam*sin_nu*4.*pi/nu
+            J2k = -1.*k_pow*(3.+nu)*gam*sin_nu*4.*pi/nu
             return J0k,J2k
 
         j0k,j2k = Jk_func(self.kbins3.reshape(-1,1),self.etamR.reshape(1,-1))
@@ -155,38 +155,13 @@ class bao_fs_sgc_z3_marg(Likelihood_prior):
         b4sig = 500.
         Pshotsig = 5e3
         css0mean = 0.
-        css2mean = 0.
+        css2mean = 30.
         b4mean = 500.
         Pshotmean = 0.
         Nmarg = 4 # number of parameters to marginalize
 
         theory0vec = np.zeros((Nmax,Nmarg+1))
         theory2vec = np.zeros((Nmax,Nmarg+1))
-
-# COMMENTED OLD PART STARTS HERE
-#        for i in range(Nmax):
-#            kinloop1 = self.kbins3[i] * h
-
-            # Compute usual theory model
-#            theory2 = (norm**2.*cosmo.pk(kinloop1, self.z)[18] +norm**4.*(cosmo.pk(kinloop1, self.z)[24])+ norm**1.*b1*cosmo.pk(kinloop1, self.z)[19] +norm**3.*b1*(cosmo.pk(kinloop1, self.z)[25]) + b1**2.*norm**2.*cosmo.pk(kinloop1, self.z)[26] +b1*b2*norm**2.*cosmo.pk(kinloop1, self.z)[34]+ b2*norm**3.*cosmo.pk(kinloop1, self.z)[35] + b1*bG2*norm**2.*cosmo.pk(kinloop1, self.z)[36]+ bG2*norm**3.*cosmo.pk(kinloop1, self.z)[37]  + 2.*(css2mean + 0.*b4mean*kinloop1**2.)*norm**2.*cosmo.pk(kinloop1, self.z)[12]/h**2. + (2.*bG2+0.8*bGamma3)*norm**3.*cosmo.pk(kinloop1, self.z)[9])*h**3. + fz**2.*b4mean*self.kbins3[i]**2.*((norm**2.*fz**2.*70. + 165.*fz*b1*norm+99.*b1**2.)*4./693.)*(35./8.)*cosmo.pk(kinloop1, self.z)[13]*h
-
-#            theory0 = (norm**2.*cosmo.pk(kinloop1, self.z)[15] +norm**4.*(cosmo.pk(kinloop1, self.z)[21])+ norm**1.*b1*cosmo.pk(kinloop1, self.z)[16] +norm**3.*b1*(cosmo.pk(kinloop1, self.z)[22]) + norm**0.*b1**2.*cosmo.pk(kinloop1, self.z)[17] +norm**2.*b1**2.*cosmo.pk(kinloop1, self.z)[23] + 0.25*norm**2.*b2**2.*cosmo.pk(kinloop1, self.z)[1] +b1*b2*norm**2.*cosmo.pk(kinloop1, self.z)[30]+ b2*norm**3.*cosmo.pk(kinloop1, self.z)[31] + b1*bG2*norm**2.*cosmo.pk(kinloop1, self.z)[32]+ bG2*norm**3.*cosmo.pk(kinloop1, self.z)[33] + b2*bG2*norm**2.*cosmo.pk(kinloop1, self.z)[4]+ bG2**2.*norm**2.*cosmo.pk(kinloop1, self.z)[5] + 2.*css0mean*norm**2.*cosmo.pk(kinloop1, self.z)[11]/h**2. + (2.*bG2+0.8*bGamma3)*norm**2.*(b1*cosmo.pk(kinloop1, self.z)[7]+norm*cosmo.pk(kinloop1, self.z)[8]))*h**3.+Pshotmean + fz**2.*b4mean*self.kbins3[i]**2.*(norm**2.*fz**2./9. + 2.*fz*b1*norm/7. + b1**2./5)*(35./8.)*cosmo.pk(kinloop1, self.z)[13]*h
-
-            # Pieces with linear dependencies on biases
-#            dtheory2_dcss0 = 0.
-#            dtheory2_dcss2 = (2.*norm**2.*cosmo.pk(kinloop1, self.z)[12]/h**2.)*h**3.
-#            dtheory2_db4 = (2.*(0.*kinloop1**2.)*norm**2.*cosmo.pk(kinloop1, self.z)[12]/h**2.)*h**3. + fz**2.*self.kbins3[i]**2.*((norm**2.*fz**2.*70. + 165.*fz*b1*norm+99.*b1**2.)*4./693.)*(35./8.)*cosmo.pk(kinloop1, self.z)[13]*h
-#            dtheory2_dPshot = 0.
-
-#            dtheory0_dcss0 = (2.*norm**2.*cosmo.pk(kinloop1, self.z)[11]/h**2.)*h**3.
-#            dtheory0_dcss2 = 0.
-#            dtheory0_db4 = fz**2.*self.kbins3[i]**2.*(norm**2.*fz**2./9. + 2.*fz*b1*norm/7. + b1**2./5)*(35./8.)*cosmo.pk(kinloop1, self.z)[13]*h
-#            dtheory0_dPshot = 1.
-
-            # Put all into a vector for simplicity
-#            theory0vec[i] = np.asarray([theory0,dtheory0_dcss0,dtheory0_dcss2,dtheory0_db4,dtheory0_dPshot])
-#            theory2vec[i] = np.asarray([theory2,dtheory2_dcss0,dtheory2_dcss2,dtheory2_db4,dtheory2_dPshot])
-# COMMENTED OLD PART ENDS HERE
 
 # Run CLASS-PT
         all_theory = cosmo.get_pk_mult(self.kbins3*h,self.z, Nmax)

@@ -293,13 +293,13 @@ class boss_full_th_error(Likelihood):
     def J0(self,r,nu):
         return -1.*np.sin(np.pi*nu/2.)*r**(-3.-1.*nu)*gamma(2+nu)/(2.*np.pi**2.)
     def J2(self,r,nu):
-        return r**(-3.-1.*nu)*(3.+nu)*gamma(2.+nu)*np.sin(np.pi*nu/2.)/(nu*2.*np.pi**2.)
+        return -1.*r**(-3.-1.*nu)*(3.+nu)*gamma(2.+nu)*np.sin(np.pi*nu/2.)/(nu*2.*np.pi**2.)
 
     # Define inverse transform functions
     def J0k(self,k,nu):
         return -1.*k**(-3.-1.*nu)*gamma(2+nu)*np.sin(np.pi*nu/2.)*(4.*np.pi)
     def J2k(self,k,nu):
-        return k**(-3.-1.*nu)*(3.+nu)*gamma(2.+nu)*np.sin(np.pi*nu/2.)*4.*np.pi/nu
+        return -1.*k**(-3.-1.*nu)*(3.+nu)*gamma(2.+nu)*np.sin(np.pi*nu/2.)*4.*np.pi/nu
 
     def convolve_theory(self,p_func,h):
         """Convolve theory with window function
