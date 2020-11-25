@@ -18,4 +18,4 @@ The repo includes:
 
 Note that you need [CLASS-PT](https://github.com/Michalychforever/CLASS-PT) to evaluate FS and FS+BAO likelihoods. We recommend using the '_marg' likelihoods, which include exact analytic marginalization over Gaussian parameters and significant optimizations.
 
-Update from 11/25/2020: minor typos in the window function treatement have been corrected; the power spectra and covariance matrices are replaced by the new measurements carried out during the project [*Cosmological constraints from BOSS with analytic covariance matrices*](https://arxiv.org/abs/2009.00622)
+Update from 11/25/2020: minor typos in the window function treatement have been corrected; the power spectra and covariance matrices are replaced by the new measurements carried out in the project [*Cosmological constraints from BOSS with analytic covariance matrices*](https://arxiv.org/abs/2009.00622)
