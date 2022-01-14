@@ -1,4 +1,6 @@
-# lss-montepython
+# lss-montepython (*deprecated*)
+
+## NB: The latest full-shape likelihoods can be found [here](https://github.com/oliverphilcox/full_shape_likelihoods)
 
 **Contributors:** Mikhail (Misha) Ivanov, Anton Chudaykin, Oliver Philcox 
 
